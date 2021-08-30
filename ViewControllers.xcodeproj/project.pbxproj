@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		712F8BF826DBAD5F0034A600 /* MultiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F8BF726DBAD5F0034A600 /* MultiViewController.swift */; };
+		712F8BFA26DBB53A0034A600 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F8BF926DBB53A0034A600 /* DrawerController.swift */; };
 		71C4BD0726DBAAE20022D051 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C4BD0626DBAAE20022D051 /* AppDelegate.swift */; };
 		71C4BD1026DBAAE30022D051 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C4BD0F26DBAAE30022D051 /* Assets.xcassets */; };
 		71C4BD1326DBAAE30022D051 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C4BD1126DBAAE30022D051 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		712F8BF726DBAD5F0034A600 /* MultiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiViewController.swift; sourceTree = "<group>"; };
+		712F8BF926DBB53A0034A600 /* DrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		71C4BD0326DBAAE20022D051 /* ViewControllers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewControllers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C4BD0626DBAAE20022D051 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71C4BD0F26DBAAE30022D051 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				71C4BD0626DBAAE20022D051 /* AppDelegate.swift */,
+				712F8BF726DBAD5F0034A600 /* MultiViewController.swift */,
+				712F8BF926DBB53A0034A600 /* DrawerController.swift */,
 				71C4BD0F26DBAAE30022D051 /* Assets.xcassets */,
 				71C4BD1126DBAAE30022D051 /* LaunchScreen.storyboard */,
 				71C4BD1426DBAAE30022D051 /* Info.plist */,
@@ -127,7 +133,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				712F8BF826DBAD5F0034A600 /* MultiViewController.swift in Sources */,
 				71C4BD0726DBAAE20022D051 /* AppDelegate.swift in Sources */,
+				712F8BFA26DBB53A0034A600 /* DrawerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
