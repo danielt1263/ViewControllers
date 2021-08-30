@@ -57,11 +57,31 @@ class ViewController: UIViewController {
 
 	override func willMove(toParent parent: UIViewController?) {
 		super.willMove(toParent: parent)
-		print("\(title!) will move to \(parent)")
+		print("\(title!) willMoveToParent: \(parent as Any)")
 	}
 
 	override func didMove(toParent parent: UIViewController?) {
-		print("\(title!) did Move to \(parent)")
+		print("\(title!) didMoveToParent: \(parent as Any)")
 		super.didMove(toParent: parent)
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		print("\(title!) viewWillAppear: \(animated)")
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		print("\(title!) viewDidAppear: \(animated)")
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		print("\(title!) viewWillDisappear: \(animated)")
+		super.viewWillDisappear(animated)
+	}
+
+	override func viewDidDisappear(_ animated: Bool) {
+		print("\(title!) viewDidDisappear: \(animated)")
+		super.viewDidDisappear(animated)
 	}
 }

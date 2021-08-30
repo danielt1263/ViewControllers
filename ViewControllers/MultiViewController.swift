@@ -27,11 +27,8 @@ class MultiController: UIViewController {
 	func selectIndex(_ index: Int, animated: Bool) {
 		let oldVC = currentActive!
 		let newVC = viewControllers[index]
-		print("oldVC", oldVC)
-		print("newVC", newVC)
 		if oldVC != newVC {
-			self.currentActive = newVC
-			connectChild(newVC, to: view)
+			addChild(newVC)
 			newVC.view.alpha = 0
 			transition(
 				from: oldVC,
@@ -42,10 +39,11 @@ class MultiController: UIViewController {
 					oldVC.view.alpha = 0
 					newVC.view.alpha = 1
 				},
-				completion: { [self] _ in
-					removeChild(oldVC)
+				completion: { _ in
+					oldVC.removeFromParent()
 				}
 			)
+			currentActive = newVC
 		}
 	}
 
@@ -56,7 +54,7 @@ class MultiController: UIViewController {
 		controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		childView.addSubview(controller.view)
 	}
-	
+
 	private func removeChild(_ controller: UIViewController) {
 		controller.willMove(toParent: nil)
 		controller.removeFromParent()
