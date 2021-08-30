@@ -11,31 +11,36 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-	let drawerController = DrawerController()
+	let multiController = MultiController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = drawerController
+        window?.rootViewController = multiController
         window?.makeKeyAndVisible()
 
-		let main = ViewController()
+		let main = ViewController(nibName: nil, bundle: nil)
 		main.backgroundColor = .red
 		main.title = "Main"
-		let drawer = ViewController()
+		let drawer = ViewController(nibName: nil, bundle: nil)
 		drawer.backgroundColor = .green
 		drawer.title = "Drawer"
 
-		drawerController.viewControllers = [main, drawer]
+		multiController.viewControllers = [main, drawer]
 
 		main.button.addTarget(self, action: #selector(mainTap), for: .touchUpInside)
-
+		drawer.button.addTarget(self, action: #selector(secondTap), for: .touchUpInside)
+		
 		return true
     }
 
 	@objc func mainTap() {
-		drawerController.open()
+		multiController.selectIndex(1, animated: true)
+	}
+	
+	@objc func secondTap() {
+		multiController.selectIndex(0, animated: false)
 	}
 }
 

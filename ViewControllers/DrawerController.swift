@@ -8,7 +8,7 @@
 import UIKit
 
 class DrawerController: UIViewController {
-
+	
 	var viewControllers: [UIViewController] = [] {
 		didSet {
 			children.forEach {
@@ -22,15 +22,15 @@ class DrawerController: UIViewController {
 			setClosed()
 		}
 	}
-
+	
 	private (set) var isOpen: Bool = false
-
+	
 	private var mainView: UIView!
 	private var drawerView: UIView!
 	private var blurView: UIVisualEffectView!
 	private var mainChild: UIViewController?
 	private var drawerChild: UIViewController?
-
+	
 	func open() {
 		if !isOpen {
 			connectChild(drawerChild!, to: drawerView)
@@ -44,7 +44,7 @@ class DrawerController: UIViewController {
 			isOpen = true
 		}
 	}
-
+	
 	func close() {
 		if isOpen {
 			UIView.animate(withDuration: 0.25, animations: { [self] in
@@ -55,7 +55,7 @@ class DrawerController: UIViewController {
 			isOpen = false
 		}
 	}
-
+	
 	override func loadView() {
 		super.loadView()
 		mainView = UIView(frame: view.bounds)
@@ -73,38 +73,38 @@ class DrawerController: UIViewController {
 		}
 		mainView.addSubview(blurView)
 	}
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		
 		let swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
 		swipe.direction = .left
 		view.addGestureRecognizer(swipe)
 	}
-
+	
 	@objc private func swipeLeft(sender: UIGestureRecognizer) {
 		if sender.state == .ended && isOpen {
 			close()
 		}
 	}
-
+	
 	private func setClosed() {
 		mainView?.frame = view.bounds
 		blurView.alpha = 0
 		blurView?.isHidden = true
 	}
-
+	
 	private func connectChild(_ controller: UIViewController, to childView: UIView) {
 		addChild(controller)
+		controller.didMove(toParent: self)
 		controller.view.frame = childView.bounds
 		controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		childView.addSubview(controller.view)
-		controller.didMove(toParent: self)
 	}
-
+	
 	private func removeChild(_ controller: UIViewController) {
 		controller.willMove(toParent: nil)
-		controller.view.removeFromSuperview()
 		controller.removeFromParent()
+		controller.view.removeFromSuperview()
 	}
 }

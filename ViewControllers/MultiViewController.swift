@@ -16,7 +16,7 @@ class MultiController: UIViewController {
 				removeChild($0)
 			}
 			if let controller = viewControllers.first {
-				connectChild(controller)
+				connectChild(controller, to: view)
 				currentActive = controller
 			}
 		}
@@ -27,10 +27,12 @@ class MultiController: UIViewController {
 	func selectIndex(_ index: Int, animated: Bool) {
 		let oldVC = currentActive!
 		let newVC = viewControllers[index]
-		newVC.view.alpha = 0
-		connectChild(newVC)
-
+		print("oldVC", oldVC)
+		print("newVC", newVC)
 		if oldVC != newVC {
+			self.currentActive = newVC
+			connectChild(newVC, to: view)
+			newVC.view.alpha = 0
 			transition(
 				from: oldVC,
 				to: newVC,
@@ -41,27 +43,23 @@ class MultiController: UIViewController {
 					newVC.view.alpha = 1
 				},
 				completion: { [self] _ in
-					self.currentActive = newVC
 					removeChild(oldVC)
 				}
 			)
 		}
 	}
 
-	private func connectChild(_ controller: UIViewController) {
-		controller.willMove(toParent: self)
+	private func connectChild(_ controller: UIViewController, to childView: UIView) {
 		addChild(controller)
-		controller.view.frame = view.bounds
-		controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		view.addSubview(controller.view)
 		controller.didMove(toParent: self)
+		controller.view.frame = childView.bounds
+		controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		childView.addSubview(controller.view)
 	}
-
+	
 	private func removeChild(_ controller: UIViewController) {
 		controller.willMove(toParent: nil)
-		controller.view.removeFromSuperview()
 		controller.removeFromParent()
-		controller.didMove(toParent: nil)
-
+		controller.view.removeFromSuperview()
 	}
 }
