@@ -56,8 +56,8 @@ class MultiController: UIViewController {
 	}
 
 	private func removeChild(_ controller: UIViewController) {
+		controller.view.removeFromSuperview()
 		controller.willMove(toParent: nil)
 		controller.removeFromParent()
-		controller.view.removeFromSuperview()
 	}
 }
