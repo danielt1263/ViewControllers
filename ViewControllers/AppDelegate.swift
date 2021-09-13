@@ -11,13 +11,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-	let multiController = MultiController()
+	let controller = DrawerController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = multiController
+        window?.rootViewController = controller
         window?.makeKeyAndVisible()
 
 		let main = ViewController(nibName: nil, bundle: nil)
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		drawer.backgroundColor = .green
 		drawer.title = "Drawer"
 
-		multiController.viewControllers = [main, drawer]
+		controller.viewControllers = [main, drawer]
 
 		main.button.addTarget(self, action: #selector(mainTap), for: .touchUpInside)
 		drawer.button.addTarget(self, action: #selector(secondTap), for: .touchUpInside)
@@ -36,11 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 	@objc func mainTap() {
-		multiController.selectIndex(1, animated: true)
+		controller.open()
 	}
 	
 	@objc func secondTap() {
-		multiController.selectIndex(0, animated: false)
+		//controller.close()
 	}
 }
 
