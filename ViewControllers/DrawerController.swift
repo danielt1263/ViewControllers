@@ -34,22 +34,30 @@ class DrawerController: UIViewController {
 	func open() {
 		if !isOpen {
 			connectChild(drawerChild!, to: drawerView)
-			UIView.animate(withDuration: 0.25, animations: { [mainView, view, blurView] in
-				if let view = view {
-					mainView?.frame = view.bounds.offsetBy(dx: view.bounds.width - 44, dy: 0)
-				}
-				blurView?.alpha = 1
-				blurView?.isHidden = false
-			})
+			mainChild?.beginAppearanceTransition(false, animated: true)
+			UIView.animate(
+				withDuration: 0.25,
+				animations: { [mainView, view, blurView] in
+					if let view = view {
+						mainView?.frame = view.bounds.offsetBy(dx: view.bounds.width - 44, dy: 0)
+					}
+					blurView?.alpha = 1
+					blurView?.isHidden = false
+				},
+				completion: { [mainChild] _ in
+					mainChild?.endAppearanceTransition()
+				})
 			isOpen = true
 		}
 	}
 
 	func close() {
 		if isOpen {
+			mainChild?.beginAppearanceTransition(true, animated: true)
 			UIView.animate(withDuration: 0.25, animations: { [self] in
 				setClosed()
-			}, completion: { [weak self, drawerChild] _ in
+			}, completion: { [weak self, mainChild, drawerChild] _ in
+				mainChild?.endAppearanceTransition()
 				self?.removeChild(drawerChild!)
 			})
 			isOpen = false

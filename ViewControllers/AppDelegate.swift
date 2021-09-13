@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	@objc func secondTap() {
-		//controller.close()
+		controller.close()
 	}
 }
 
