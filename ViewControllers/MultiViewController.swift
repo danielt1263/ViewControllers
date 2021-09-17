@@ -15,6 +15,7 @@ class MultiController: UIViewController {
 			children.forEach {
 				removeChild($0)
 			}
+			currentActive = nil
 			if let controller = viewControllers.first {
 				connectChild(controller, to: view)
 				currentActive = controller
