@@ -1,9 +1,7 @@
 //
 //  MultiViewController.swift
-//  M3 Labor
 //
 //  Created by Daniel Tartaglia on 8/16/21.
-//  Copyright © 2021 Haneke Design. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +15,7 @@ class MultiController: UIViewController {
 			}
 			currentActive = nil
 			if let controller = viewControllers.first {
-				connectChild(controller, to: view)
+				connectChild(controller)
 				currentActive = controller
 			}
 		}
@@ -30,6 +28,7 @@ class MultiController: UIViewController {
 		let newVC = viewControllers[index]
 		if oldVC != newVC {
 			addChild(newVC)
+			newVC.view.frame = view.bounds
 			newVC.view.alpha = 0
 			transition(
 				from: oldVC,
@@ -42,18 +41,19 @@ class MultiController: UIViewController {
 				},
 				completion: { _ in
 					oldVC.removeFromParent()
+					newVC.didMove(toParent: self)
 				}
 			)
 			currentActive = newVC
 		}
 	}
 
-	private func connectChild(_ controller: UIViewController, to childView: UIView) {
+	private func connectChild(_ controller: UIViewController) {
 		addChild(controller)
 		controller.didMove(toParent: self)
-		controller.view.frame = childView.bounds
+		controller.view.frame = view.bounds
 		controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		childView.addSubview(controller.view)
+		view.addSubview(controller.view)
 	}
 
 	private func removeChild(_ controller: UIViewController) {
